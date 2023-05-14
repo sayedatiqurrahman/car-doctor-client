@@ -64,7 +64,7 @@ const BookService = () => {
                         <label className="label">
                             <span className="label-text">Email</span>
                         </label>
-                        <input type="text" name="email" defaultValue={user?.email} placeholder="email" disabled className="input input-bordered" />
+                        <input type="email" name="email" defaultValue={user?.email} placeholder="email" required disabled className="input input-bordered" />
                     </div>
                     <div className="form-control">
                         <label className="label">
