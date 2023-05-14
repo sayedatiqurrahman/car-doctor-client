@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
-
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import SocialLogin from './SocialLogin';
 const Login = () => {
-
+    const [showHide, setShowHide] = useState(false)
     const { signIn } = useContext(AuthContext);
 
     const handleLogin = event => {
@@ -16,7 +17,11 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 const user = result.user;
+
                 console.log(user);
+
+
+
             })
             .catch(error => console.log(error));
     }
@@ -41,7 +46,10 @@ const Login = () => {
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="text" name='password' placeholder="password" className="input input-bordered" />
+                                <div className="relative">
+                                    <input type={!showHide ? 'password' : 'text'} name='password' placeholder="password" className="input input-bordered w-full" />
+                                    <div className="absolute top-1/2 -translate-y-1/2 right-4 cursor-pointer">{showHide ? <FaEyeSlash onClick={() => setShowHide(!showHide)} /> : <FaEye onClick={() => setShowHide(!showHide)} />}</div>
+                                </div>
                                 <label className="label">
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
@@ -51,6 +59,7 @@ const Login = () => {
                             </div>
                         </form>
                         <p className='my-4 text-center'>New to Car Doctors <Link className='text-orange-600 font-bold' to="/signup">Sign Up</Link> </p>
+                        <SocialLogin />
                     </div>
                 </div>
             </div>
